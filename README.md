@@ -14,4 +14,4 @@ colorama: https://pypi.org/project/colorama/
 
 15.05.2023:
 
-There are no any versions yet
+The menu has been added
