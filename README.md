@@ -1,7 +1,8 @@
 This is a project in which I create Five Nights at Freddy`s in Python
 
-Support:
+If you find a bug, please write about it to mail:
 fnafinpython@gmail.com
+, or in issues
 
 To run the program you need:
 
