@@ -19,6 +19,10 @@ The menu has been added
 16.05.2023:
 The main office has been added. There are no cameras. Monsters cannot spawn and cannot be seen in the light. When all energy is lost, nothing happens
 
-22:25 16.05.2023
+10:25 PM 16.05.2023:
 PATCHED
 Sounds have been added
+
+11:07 PM 16.05.2023:
+PATCHED
+Newspaper has been added
