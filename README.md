@@ -16,3 +16,7 @@ colorama: https://pypi.org/project/colorama/
 15.05.2023:
 
 The menu has been added
+
+16.05.2023:
+
+The main office has been added. There are no cameras. Monsters cannot spawn and cannot be seen in the light.
