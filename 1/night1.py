@@ -356,6 +356,11 @@ usage.set_colorkey(colorKey), powerLeft.set_colorkey(colorKey), interest.set_col
 powerLeft1.set_colorkey(BLACK), powerLeft2.set_colorkey(BLACK), powerLeft3.set_colorkey(BLACK)
 powerLeft4.set_colorkey(BLACK), powerLeft5.set_colorkey(BLACK)
 
+ambienceSoundVolume = pygame.mixer.music.load(officeSoundsFolder + 'ambience.mp3')
+fanSoundVolume = pygame.mixer.music.load(officeSoundsFolder + 'fan.mp3')
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+
 # display
 while run:
     # update
@@ -372,10 +377,14 @@ while run:
 
     if key[pygame.K_a]:
         left = True
-        if buttonRightLight: usageNow -= 1
+        if buttonRightLight:
+            usageNow -= 1
+            lampSound.stop()
     if key[pygame.K_d]:
         left = False
-        if buttonLeftLight: usageNow -= 1
+        if buttonLeftLight:
+            usageNow -= 1
+            lampSound.stop()
 
     if not buttonLeftDoorDeley and not buttonRightDoorDeley:
         if key[pygame.K_q]:
@@ -393,26 +402,42 @@ while run:
     if left:
         if not buttonLeftDoorDeley:
             if key[pygame.K_q]:
-                if buttonLeftDoor: buttonLeftDoor = False
-                else: buttonLeftDoor = True
+                if buttonLeftDoor:
+                    doorSound.play()
+                    buttonLeftDoor = False
+                else:
+                    doorSound.play()
+                    buttonLeftDoor = True
                 buttonLeftDoorDeley = True
                 leftDoorCounter = 0
         if not buttonLeftLightDeley:
             if key[pygame.K_e]:
-                if buttonLeftLight: buttonLeftLight = False
-                else: buttonLeftLight = True
+                if buttonLeftLight:
+                    buttonLeftLight = False
+                    lampSound.stop()
+                else:
+                    buttonLeftLight = True
+                    lampSound.play(-1)
                 buttonLeftLightDeley = True
     else:
         if not buttonRightDoorDeley:
             if key[pygame.K_q]:
-                if buttonRightDoor: buttonRightDoor = False
-                else: buttonRightDoor = True
+                if buttonRightDoor:
+                    buttonRightDoor = False
+                    doorSound.play()
+                else:
+                    buttonRightDoor = True
+                    doorSound.play()
                 buttonRightDoorDeley = True
                 rightDoorCounter = 0
         if not buttonRightLightDeley:
             if key[pygame.K_e]:
-                if buttonRightLight: buttonRightLight = False
-                else: buttonRightLight = True
+                if buttonRightLight:
+                    buttonRightLight = False
+                    lampSound.stop()
+                else:
+                    buttonRightLight = True
+                    lampSound.play(-1)
                 buttonRightLightDeley = True
 
     if buttonLeftDoorDeley:

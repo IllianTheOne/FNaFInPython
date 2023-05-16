@@ -23,3 +23,7 @@ doorLeftCloseFolder = './textures/doors/Left Door Close/'
 doorRightCloseFolder = './textures/doors/Right Door Close/'
 clockFolder = './textures/clock/'
 batteryFolder = './textures/battery/'
+# ~sounds
+officeSoundsFolder = './sounds/office/'
+# ~sounds
+officeSoundsFolder = './sounds/office/'
