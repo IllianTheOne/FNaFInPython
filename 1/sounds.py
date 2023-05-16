@@ -16,3 +16,7 @@ doorSound = pygame.mixer.Sound(officeSoundsFolder + 'door.mp3')
 # office
 lampSound = pygame.mixer.Sound(officeSoundsFolder + 'lamps.mp3')
 doorSound = pygame.mixer.Sound(officeSoundsFolder + 'door.mp3')
+
+# office
+lampSound = pygame.mixer.Sound(officeSoundsFolder + 'lamps.mp3')
+doorSound = pygame.mixer.Sound(officeSoundsFolder + 'door.mp3')

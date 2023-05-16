@@ -27,3 +27,5 @@ batteryFolder = './textures/battery/'
 officeSoundsFolder = './sounds/office/'
 # ~sounds
 officeSoundsFolder = './sounds/office/'
+# ~sounds
+officeSoundsFolder = './sounds/office/'
