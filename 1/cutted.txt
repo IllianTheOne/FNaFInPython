@@ -1,4 +1,5 @@
-    if 275 > Counter > 215: win.blit(night1Count, (night1CountX, night1CountY))
-
-    if Counter < 200: win.blit(newspaperAnimation[Counter], (newspaperX, newspaperY))
-    elif 215 > Counter > 200: win.blit(secondNoiseAnimation[secondNoiseCounter], (secondNoiseX, secondNoiseX))
+    if key[pygame.K_1]: usageNow = 1
+    if key[pygame.K_2]: usageNow = 2
+    if key[pygame.K_3]: usageNow = 3
+    if key[pygame.K_4]: usageNow = 4
+    if key[pygame.K_5]: usageNow = 5

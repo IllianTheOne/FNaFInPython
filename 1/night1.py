@@ -336,7 +336,7 @@ rightDoorOpenAnimation = [pygame.image.load(doorRightFolder + '14.png').convert(
                           pygame.image.load(doorRightFolder + '1.png').convert(),
                           pygame.image.load(doorRightFolder + '15.png').convert()]
 
-night1Count.convert(), officeWithEnergy.convert(), night1Night1.convert()
+officeWithEnergy.convert(), night1Night1.convert()
 clock12AM.convert(), clock1AM.convert(), clock2AM.convert()
 clock3AM.convert(), clock4AM.convert(), clock5AM.convert()
 clock6AM.convert()
@@ -492,7 +492,6 @@ while run:
     powerText = fontText.render(str(power), True, WHITE)
 
     # blit
-    #if Counter == 275:
     if left:
         if buttonLeftLight: win.blit(officeLightLeft, (officeWithEnergyXLeft, officeWithEnergyYLeft))
         else: win.blit(officeWithEnergy, (officeWithEnergyXLeft, officeWithEnergyYLeft))
@@ -544,12 +543,6 @@ while run:
         win.blit(interest, (interestX3, interestY3))
     win.blit(powerLeft, (powerLeftX, powerLeftY))
 
-    if key[pygame.K_1]: usageNow = 1
-    if key[pygame.K_2]: usageNow = 2
-    if key[pygame.K_3]: usageNow = 3
-    if key[pygame.K_4]: usageNow = 4
-    if key[pygame.K_5]: usageNow = 5
-
     if usageNow == 1: win.blit(powerLeft1, (usagePowerLeftX, usagePowerLeftY))
     if usageNow == 2: win.blit(powerLeft2, (usagePowerLeftX, usagePowerLeftY))
     if usageNow == 3: win.blit(powerLeft3, (usagePowerLeftX, usagePowerLeftY))
@@ -578,5 +571,6 @@ while run:
         leftDoorCounter = 15-1
     if rightDoorCounter == len(rightDoorOpenAnimation):
         rightDoorCounter = 15-1
+
 # quit
 pygame.quit()

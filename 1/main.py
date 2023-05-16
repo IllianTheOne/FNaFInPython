@@ -270,5 +270,5 @@ pygame.quit()
 
 if choise == 3:
     with open('save.py', 'w') as f: f.write(saveDescription)
-    os.system('python night' + str(night) + '.py')
+    os.system('python newspaper.py')
 if choise == 4: os.system('python night' + str(night) + '.py')

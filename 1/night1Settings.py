@@ -2,6 +2,7 @@
 win_width, win_height = 1280, 720
 winCaption = 'Five Nights at Freddy`s'
 FPS = 60
+newspapperFPS = 20
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 colorKey = (90, 90, 90)
