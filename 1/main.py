@@ -5,16 +5,25 @@ from version import ver
 from mainSettings import *
 from textures import *
 from sounds import *
+from save import *
+import os
 
 # colorama
 init()
 print(Fore.BLACK, Back.RED, ver, Fore.RESET, Back.RESET)
+
+# save
+if not change:
+    with open('save.py', 'w') as f: f.write(saveDescription)
+    os.system('python main.py')
 
 # variables
 run = True
 clock = pygame.time.Clock()
 
 choise = 1
+nightCounter = night
+
 choiseDeley, choiseDeleyTime = False, 5
 
 freddyMainCounter = 0
@@ -173,12 +182,18 @@ secondNoiseAnimation = [pygame.image.load(secondNoiseLink + '1.png').convert_alp
                         pygame.image.load(secondNoiseLink + '14.png').convert_alpha(),
                         pygame.image.load(secondNoiseLink + '15.png').convert_alpha()]
 
+nightTexture = [pygame.image.load(nightCounterLink + '1.png').convert_alpha(),
+                pygame.image.load(nightCounterLink + '2.png').convert_alpha(),
+                pygame.image.load(nightCounterLink + '3.png').convert_alpha(),
+                pygame.image.load(nightCounterLink + '4.png').convert_alpha(),
+                pygame.image.load(nightCounterLink + '5.png').convert_alpha(),
+                pygame.image.load(nightCounterLink + '6.png').convert_alpha(),
+                pygame.image.load(nightCounterLink + '7.png').convert_alpha()]
+
 icon.convert(), FNaF.convert(), scott.convert()
-FNaF.set_colorkey(colorKey)
-scott.set_colorkey(colorKey)
-Continue.set_colorkey(colorKey)
-newGame.set_colorkey(colorKey)
-arrow.set_colorkey(colorKey)
+
+FNaF.set_colorkey(colorKey), scott.set_colorkey(colorKey), Continue.set_colorkey(colorKey)
+newGame.set_colorkey(colorKey), arrow.set_colorkey(colorKey)
 
 # music
 pygame.mixer.Sound(menuMusicLink).play(-1, 0, 0)
@@ -196,6 +211,11 @@ while run:
     key = pygame.key.get_pressed()
 
     if key[pygame.K_BACKSPACE]: run = False
+
+    if key[pygame.K_RETURN]:
+        if choise == 1: choise = 3
+        else: choise = 4
+        run = False
 
     if not choiseDeley:
         if key[pygame.K_w]:
@@ -232,7 +252,7 @@ while run:
     win.blit(newGame, (newGameX, newGameY))
     win.blit(Continue, (ContinueX, ContinueY))
     if choise == 1: win.blit(arrow, (arrowX1, arrowY1))
-    else: win.blit(arrow, (arrowX2, arrowY2))
+    else:win.blit(arrow, (arrowX2, arrowY2)), win.blit(nightTexture[nightCounter-1], (nightTextureX, nightTextureY))
 
     # update
     pygame.display.update()
@@ -241,12 +261,14 @@ while run:
     firstNoiseCounter += 1
     secondNoiseCounter += 1
 
-    if freddyMainCounter >= len(freddyMainAnimation):
-        freddyMainCounter = 0
-    if firstNoiseCounter >= len(firstNoiseAnimation):
-        firstNoiseCounter = 0
-    if secondNoiseCounter >= len(secondNoiseAnimation):
-        secondNoiseCounter = 0
+    if freddyMainCounter >= len(freddyMainAnimation): freddyMainCounter = 0
+    if firstNoiseCounter >= len(firstNoiseAnimation): firstNoiseCounter = 0
+    if secondNoiseCounter >= len(secondNoiseAnimation): secondNoiseCounter = 0
 
 # quit
 pygame.quit()
+
+if choise == 3:
+    with open('save.py', 'w') as f: f.write(saveDescription)
+    os.system('python night' + str(night) + '.py')
+if choise == 4: os.system('python night' + str(night) + '.py')

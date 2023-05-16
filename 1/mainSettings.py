@@ -5,6 +5,7 @@ FPS = 20
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 colorKey = (90, 90, 90)
+saveDescription = 'change = True\nnight = 1'
 
 # freddyMainAnimation, firstNoiseAnimation, secondNoiseAnimation
 freddyMainX, freddyMainY = 0, 0
@@ -22,3 +23,6 @@ verTextX, verTextY = 25, 700
 newGameX, newGameY = 150, 400
 ContinueX, ContinueY = 150, 500
 arrowX1, arrowY1, arrowX2, arrowY2 = 75, 405, 75, 505
+
+# night
+nightTextureX, nightTextureY = 250, 550

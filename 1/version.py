@@ -1,1 +1,1 @@
-ver = 'v0.1(15052023pre_alpha)'
+ver = 'v0.2(16052023pre_alpha)'

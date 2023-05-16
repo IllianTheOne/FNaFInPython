@@ -1,0 +1,4 @@
+    if 275 > Counter > 215: win.blit(night1Count, (night1CountX, night1CountY))
+
+    if Counter < 200: win.blit(newspaperAnimation[Counter], (newspaperX, newspaperY))
+    elif 215 > Counter > 200: win.blit(secondNoiseAnimation[secondNoiseCounter], (secondNoiseX, secondNoiseX))
