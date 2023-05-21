@@ -10,8 +10,10 @@ colorKey = (90, 90, 90)
 # newspaper
 newspaperX, newspaperY = 0, 0
 
-# second Noise
+# first, second, third Noise
+firstNoiseX, firstNoiseY = 0, 0
 secondNoiseX, secondNoiseY = 0, 0
+thirdNoiseX, thirdNoiseY = 0, 0
 
 # night 1 Count
 night1CountX, night1CountY = 550, 300
@@ -39,3 +41,25 @@ interestX2, interestY2 = 123, 660
 interestX3, interestY3 = 111, 660
 powerLeftX, powerLeftY = 10, 690
 usagePowerLeftX, usagePowerLeftY = 155, 680
+
+# camera
+cameraFlipX, cameraFlipY = 0, 0
+cameraOverlayX, cameraOverlayY = 15, 15
+cameraPointX, cameraPointY = 40, 40
+camMapX, camMapY = 875, 300
+camImageX, camImageY = 0, 0
+camDiningRoomTextX, camDiningRoomTextY = 875, 275
+camEmployesOnlyTextX, camEmployesOnlyTextY = 875, 275
+kitchen1X, kitchen1Y = 454, 50
+kitchenTextX, kitchenTextY = 925, 275
+leftCornerTextX, leftCornerTextY = 925, 275
+leftHallwayTextX, leftHallwayTextY = 925, 275
+pirateCoveTextX, pirateCoveTextY = 925, 275
+rightCornerTextX, rightCornerTextY = 925, 275
+rightHallwayTextX, rightHallwayTextY = 925, 275
+stageTextX, stageTextY = 925, 275
+toiletsTextX, toiletsTextY = 925, 275
+utilityClosetTextX, utilityClosetTextY = 925, 275
+
+# skip call
+callSkipTextX, callSkipTextY = 10, 10

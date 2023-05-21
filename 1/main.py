@@ -7,6 +7,8 @@ from textures import *
 from sounds import *
 from save import *
 import os
+import random
+import time
 
 # colorama
 init()
@@ -23,6 +25,7 @@ clock = pygame.time.Clock()
 
 choise = 1
 nightCounter = night
+RandintValue = random.choices([True, False], weights=[10, 90])
 
 choiseDeley, choiseDeleyTime = False, 5
 
@@ -190,10 +193,16 @@ nightTexture = [pygame.image.load(nightCounterLink + '1.png').convert_alpha(),
                 pygame.image.load(nightCounterLink + '6.png').convert_alpha(),
                 pygame.image.load(nightCounterLink + '7.png').convert_alpha()]
 
-icon.convert(), FNaF.convert(), scott.convert()
+icon.convert(), FNaF.convert(), scott.convert(), bonny.convert()
 
 FNaF.set_colorkey(colorKey), scott.set_colorkey(colorKey), Continue.set_colorkey(colorKey)
 newGame.set_colorkey(colorKey), arrow.set_colorkey(colorKey)
+
+if RandintValue == [True]:
+    win.blit(bonny, (bonnyX, bonnyY))
+    pygame.display.update()
+    time.sleep(10)
+    win.fill(BLACK)
 
 # music
 pygame.mixer.Sound(menuMusicLink).play(-1, 0, 0)

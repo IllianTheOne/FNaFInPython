@@ -7,10 +7,11 @@ WHITE = (255, 255, 255)
 colorKey = (90, 90, 90)
 saveDescription = 'change = True\nnight = 1'
 
-# freddyMainAnimation, firstNoiseAnimation, secondNoiseAnimation
+# freddyMainAnimation, firstNoiseAnimation, secondNoiseAnimation, bonny
 freddyMainX, freddyMainY = 0, 0
 firstNoiseX, firstNoiseY = 0, 0
 secondNoiseX, secondNoiseY = 0, 0
+bonnyX, bonnyY = 0, 0
 
 # FNaF, scott
 FNaFX, FNaFY = 75, 75

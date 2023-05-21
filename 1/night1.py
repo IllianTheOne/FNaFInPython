@@ -7,6 +7,7 @@ from textures import *
 from sounds import *
 from save import *
 import os
+import random
 
 # colorama
 init()
@@ -22,21 +23,53 @@ tick = 0 # The End: 21600
 power = 100
 usageNow = 1
 usageDeley = 500
+cameraOn = False
+cameraBlackFill = False
+cameraNow = 'A'
+bonnyLocation = 'A'
+chicaLocation = 'A'
+freddyLocation = 'A'
+foxyLocation = 'G'
+foxyStage = 1
+goldenFreddy = None
+foxyDeley = 0 # 2700
+camImageXMove = None
+
+FRandint = True
+FRandintValue = None
+LRandint = True
+LRandintValue = None
+GRandint = True
+GRandintValue = None
+ORandint = True
+ORandintValue = None
+PRandint = True
+PRandintValue = None
+ARandint = True
+ARandintValue = None
 
 buttonLeftDoor = False
 buttonLeftLight = False
 buttonRightDoor = False
 buttonRightLight = False
 
+thirdNoiseCounter = 8-1
+firstNoiseCounter = 0
 secondNoiseCounter = 0
 fanCounter = 0
 leftDoorCounter = 15-1
 rightDoorCounter = 15-1
+camFlipCounter = 11-1
+pointCounter = 0
+pointCounter1 = False
+leftHallwayCounter = 0
+call1SkipDeley = 0
 
 buttonLeftDoorDeley, buttonLeftDoorDeleyTime = False, 20
 buttonLeftLightDeley, buttonLeftLightDeleyTime = False, 20
 buttonRightDoorDeley, buttonRightDoorDeleyTime = False, 20
 buttonRightLightDeley, buttonRightLightDeleyTime = False, 20
+cameraDeley, cameraDeleyTime = False, 15
 
 # pygame init
 pygame.init()
@@ -50,207 +83,14 @@ pygame.display.set_icon(icon)
 pygame.mouse.set_visible(False)
 
 # animations, convert and set_colorkey
-newspaperAnimation = [pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),
-            pygame.image.load(textFolder + 'newspaper.png').convert(),]
+firstNoiseAnimation = [pygame.image.load(thirdNoiseLink + '1.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '2.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '3.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '4.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '5.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '6.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '7.png').convert_alpha(),
+                       pygame.image.load(thirdNoiseLink + '8.png').convert_alpha()]
 
 secondNoiseAnimation = [pygame.image.load(secondNoiseLink + '1.png').convert_alpha(),
                         pygame.image.load(secondNoiseLink + '2.png').convert_alpha(),
@@ -267,6 +107,23 @@ secondNoiseAnimation = [pygame.image.load(secondNoiseLink + '1.png').convert_alp
                         pygame.image.load(secondNoiseLink + '13.png').convert_alpha(),
                         pygame.image.load(secondNoiseLink + '14.png').convert_alpha(),
                         pygame.image.load(secondNoiseLink + '15.png').convert_alpha()]
+
+thirdNoiseAnimation = [pygame.image.load(secondNoiseLink + '1.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '2.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '3.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '4.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '5.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '6.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '7.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '8.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '9.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '10.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '11.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '12.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '13.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '14.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '15.png').convert_alpha(),
+                        pygame.image.load(secondNoiseLink + '16.png').convert_alpha()]
 
 fanAnimation = [pygame.image.load(fanFolder + '1.png').convert(),
                 pygame.image.load(fanFolder + '2.png').convert(),
@@ -336,6 +193,66 @@ rightDoorOpenAnimation = [pygame.image.load(doorRightFolder + '14.png').convert(
                           pygame.image.load(doorRightFolder + '1.png').convert(),
                           pygame.image.load(doorRightFolder + '15.png').convert()]
 
+camFlipOpen = [pygame.image.load(flipFolder + '1.png').convert_alpha(),
+               pygame.image.load(flipFolder + '2.png').convert_alpha(),
+               pygame.image.load(flipFolder + '3.png').convert_alpha(),
+               pygame.image.load(flipFolder + '4.png').convert_alpha(),
+               pygame.image.load(flipFolder + '5.png').convert_alpha(),
+               pygame.image.load(flipFolder + '6.png').convert_alpha(),
+               pygame.image.load(flipFolder + '7.png').convert_alpha(),
+               pygame.image.load(flipFolder + '8.png').convert_alpha(),
+               pygame.image.load(flipFolder + '9.png').convert_alpha(),
+               pygame.image.load(flipFolder + '10.png').convert_alpha(),
+               pygame.image.load(flipFolder + '11.png').convert_alpha()]
+
+camFlipClose = [pygame.image.load(flipFolder + '10.png').convert_alpha(),
+               pygame.image.load(flipFolder + '9.png').convert_alpha(),
+               pygame.image.load(flipFolder + '8.png').convert_alpha(),
+               pygame.image.load(flipFolder + '7.png').convert_alpha(),
+               pygame.image.load(flipFolder + '6.png').convert_alpha(),
+               pygame.image.load(flipFolder + '5.png').convert_alpha(),
+               pygame.image.load(flipFolder + '4.png').convert_alpha(),
+               pygame.image.load(flipFolder + '3.png').convert_alpha(),
+               pygame.image.load(flipFolder + '2.png').convert_alpha(),
+               pygame.image.load(flipFolder + '1.png').convert_alpha(),
+               pygame.image.load(flipFolder + '11.png').convert_alpha()]
+
+leftHallwayWithoutBonnyAnimation = [pygame.image.load(LeftHallwayFolder + '2.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '2.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '2.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '2.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '2.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '2.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert()]
+
+leftHallwayWithBonnyAnimation = [pygame.image.load(LeftHallwayFolder + '3.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '3.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '3.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '3.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '3.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '3.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert(),
+                                    pygame.image.load(LeftHallwayFolder + '1.png').convert()]
+
 officeWithEnergy.convert(), night1Night1.convert()
 clock12AM.convert(), clock1AM.convert(), clock2AM.convert()
 clock3AM.convert(), clock4AM.convert(), clock5AM.convert()
@@ -347,6 +264,48 @@ buttonLeftFalseFalse.convert(), buttonLeftTrueFalse.convert(), buttonLeftFalseTr
 buttonLeftTrueTrue.convert()
 buttonRightFalseFalse.convert(), buttonRightTrueFalse.convert(), buttonRightFalseTrue.convert()
 buttonRightTrueTrue.convert()
+CamA.convert_alpha(), CamD.convert_alpha(), CamF.convert_alpha()
+CamG.convert_alpha(), CamH.convert_alpha(), CamJ.convert_alpha()
+CamK.convert_alpha(), CamL.convert_alpha(), CamO.convert_alpha()
+CamP.convert_alpha(), CamS.convert_alpha(), CamOverlay.convert_alpha()
+CamPoint.convert()
+
+diningRoom1.convert(), diningRoom2.convert(), diningRoom3.convert()
+diningRoom4.convert(), diningRoom5.convert(), diningRoom6.convert()
+diningRoomText.convert()
+
+employeesOnly1.convert(), employeesOnly2.convert(), employeesOnly3.convert()
+employeesOnly4.convert(), employeesOnly5.convert(), employeesOnlyText.convert()
+
+kitchen1.convert(), kitchenText.convert()
+
+leftCorner1.convert(), leftCorner2.convert(), leftCorner3.convert()
+leftCorner4.convert(), leftCorner5.convert(), leftCorner6.convert()
+leftCornerText.convert()
+
+leftHallwayText.convert()
+
+pirateCove1.convert(), pirateCove2.convert(), pirateCove3.convert()
+pirateCove4.convert(), pirateCove5.convert(), pirateCoveText.convert()
+
+rightCorner1.convert(), rightCorner2.convert(), rightCorner3.convert()
+rightCorner4.convert(), rightCorner5.convert(), rightCorner6.convert()
+rightCorner7.convert(), rightCorner8.convert(), rightCorner9.convert()
+rightCornerText.convert()
+
+rightHallway1.convert(), rightHallway2.convert(), rightHallway3.convert()
+rightHallway4.convert(), rightHallway5.convert(), rightHallway6.convert()
+rightHallwayText.convert()
+
+stage1.convert(), stage2.convert(), stage3.convert()
+stage4.convert(), stage5.convert(), stage6.convert()
+stage7.convert(), stageText.convert()
+
+toilets1.convert(), toilets2.convert(), toilets3.convert()
+toilets4.convert(), toiletsText.convert()
+
+utilityCloset1.convert(), utilityCloset2.convert(), utilityClosetText.convert()
+
 night1Count.set_colorkey(colorKey)
 buttonLeftFalseFalse.set_colorkey(BLACK), buttonLeftTrueFalse.set_colorkey(BLACK)
 buttonLeftFalseTrue.set_colorkey(BLACK), buttonLeftTrueTrue.set_colorkey(BLACK)
@@ -355,11 +314,20 @@ buttonRightFalseTrue.set_colorkey(BLACK), buttonRightTrueTrue.set_colorkey(BLACK
 usage.set_colorkey(colorKey), powerLeft.set_colorkey(colorKey), interest.set_colorkey(colorKey)
 powerLeft1.set_colorkey(BLACK), powerLeft2.set_colorkey(BLACK), powerLeft3.set_colorkey(BLACK)
 powerLeft4.set_colorkey(BLACK), powerLeft5.set_colorkey(BLACK)
+CamPoint.set_colorkey(BLACK)
+
+diningRoomText.set_colorkey(colorKey), employeesOnlyText.set_colorkey(colorKey)
+kitchenText.set_colorkey(colorKey), leftCornerText.set_colorkey(colorKey)
+leftHallwayText.set_colorkey(colorKey), pirateCoveText.set_colorkey(colorKey)
+rightCornerText.set_colorkey(colorKey), rightHallwayText.set_colorkey(colorKey)
+stageText.set_colorkey(colorKey), toiletsText.set_colorkey(colorKey)
+utilityClosetText.set_colorkey(colorKey), kitchen1.set_colorkey(colorKey)
 
 ambienceSoundVolume = pygame.mixer.music.load(officeSoundsFolder + 'ambience.mp3')
 fanSoundVolume = pygame.mixer.music.load(officeSoundsFolder + 'fan.mp3')
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
+call1Sounds.play()
 
 # display
 while run:
@@ -375,70 +343,103 @@ while run:
 
     if key[pygame.K_BACKSPACE]: run = False
 
-    if key[pygame.K_a]:
-        left = True
-        if buttonRightLight:
-            usageNow -= 1
-            lampSound.stop()
-    if key[pygame.K_d]:
-        left = False
-        if buttonLeftLight:
-            usageNow -= 1
-            lampSound.stop()
+    if not cameraOn:
+        if key[pygame.K_a]:
+            left = True
+            if buttonRightLight:
+                usageNow -= 1
+                lampSound.stop()
+        if key[pygame.K_d]:
+            left = False
+            if buttonLeftLight:
+                usageNow -= 1
+                lampSound.stop()
 
-    if not buttonLeftDoorDeley and not buttonRightDoorDeley:
-        if key[pygame.K_q]:
-            if left and buttonLeftDoor: usageNow -= 1
-            elif left and not buttonLeftDoor: usageNow += 1
-            if not left and buttonRightDoor: usageNow -= 1
-            elif not left and not buttonRightDoor: usageNow += 1
-    if not buttonLeftLightDeley and not buttonRightLightDeley:
-        if key[pygame.K_e]:
-            if left and buttonLeftLight: usageNow -= 1
-            elif left and not buttonLeftLight: usageNow += 1
-            if not left and buttonRightLight: usageNow -= 1
-            elif not left and not buttonRightLight: usageNow += 1
+        if not buttonLeftDoorDeley and not buttonRightDoorDeley:
+            if key[pygame.K_q]:
+                if left and buttonLeftDoor: usageNow -= 1
+                elif left and not buttonLeftDoor: usageNow += 1
+                if not left and buttonRightDoor: usageNow -= 1
+                elif not left and not buttonRightDoor: usageNow += 1
+        if not buttonLeftLightDeley and not buttonRightLightDeley:
+            if key[pygame.K_e]:
+                if left and buttonLeftLight: usageNow -= 1
+                elif left and not buttonLeftLight: usageNow += 1
+                if not left and buttonRightLight: usageNow -= 1
+                elif not left and not buttonRightLight: usageNow += 1
 
-    if left:
-        if not buttonLeftDoorDeley:
-            if key[pygame.K_q]:
-                if buttonLeftDoor:
-                    doorSound.play()
-                    buttonLeftDoor = False
-                else:
-                    doorSound.play()
-                    buttonLeftDoor = True
-                buttonLeftDoorDeley = True
-                leftDoorCounter = 0
-        if not buttonLeftLightDeley:
-            if key[pygame.K_e]:
-                if buttonLeftLight:
-                    buttonLeftLight = False
-                    lampSound.stop()
-                else:
-                    buttonLeftLight = True
-                    lampSound.play(-1)
-                buttonLeftLightDeley = True
-    else:
-        if not buttonRightDoorDeley:
-            if key[pygame.K_q]:
-                if buttonRightDoor:
-                    buttonRightDoor = False
-                    doorSound.play()
-                else:
-                    buttonRightDoor = True
-                    doorSound.play()
-                buttonRightDoorDeley = True
-                rightDoorCounter = 0
-        if not buttonRightLightDeley:
-            if key[pygame.K_e]:
-                if buttonRightLight:
-                    buttonRightLight = False
-                    lampSound.stop()
-                else:
-                    buttonRightLight = True
-                    lampSound.play(-1)
-                buttonRightLightDeley = True
+        if left:
+            if not buttonLeftDoorDeley:
+                if key[pygame.K_q]:
+                    if buttonLeftDoor:
+                        doorSound.play()
+                        buttonLeftDoor = False
+                    else:
+                        doorSound.play()
+                        buttonLeftDoor = True
+                    buttonLeftDoorDeley = True
+                    leftDoorCounter = 0
+            if not buttonLeftLightDeley:
+                if key[pygame.K_e]:
+                    if buttonLeftLight:
+                        buttonLeftLight = False
+                        lampSound.stop()
+                    else:
+                        buttonLeftLight = True
+                        lampSound.play(-1)
+                    buttonLeftLightDeley = True
+        else:
+            if not buttonRightDoorDeley:
+                if key[pygame.K_q]:
+                    if buttonRightDoor:
+                        buttonRightDoor = False
+                        doorSound.play()
+                    else:
+                        buttonRightDoor = True
+                        doorSound.play()
+                    buttonRightDoorDeley = True
+                    rightDoorCounter = 0
+            if not buttonRightLightDeley:
+                if key[pygame.K_e]:
+                    if buttonRightLight:
+                        buttonRightLight = False
+                        lampSound.stop()
+                    else:
+                        buttonRightLight = True
+                        lampSound.play(-1)
+                    buttonRightLightDeley = True
+
+    if key[pygame.K_SPACE] or key[pygame.K_c]:
+        if not cameraDeley:
+            if not cameraOn:
+                cameraOn = True
+                camFlipCounter = 0
+                usageNow += 1
+                FRandint = True
+                LRandint = True
+                GRandint = True
+                ORandint = True
+                PRandint = True
+                ARandint = True
+                cameraSound.play()
+            else:
+                cameraOn = False
+                camFlipCounter = 0
+                cameraBlackFill = False
+                usageNow -= 1
+                cameraSound.play()
+            cameraDeley = True
+
+    if key[pygame.K_x]:
+        call1SkipDeley = 401
+        call1Sounds.stop()
+
+    if cameraDeley:
+        if cameraDeleyTime == 0:
+            cameraDeley = False
+            cameraDeleyTime = 15
+        else:
+            cameraDeleyTime -= 1
 
     if buttonLeftDoorDeley:
         if buttonLeftDoorDeleyTime == 0:
@@ -487,9 +488,13 @@ while run:
     else:
         if buttonLeftLight: buttonLeftLight = False
 
+    if camImageX == -320: camImageXMove = False
+    elif camImageX == 0: camImageXMove = True
+
     # text
     fontText = pygame.font.SysFont("FiveFontsatFreddy's-Regular.ttf", 32)
     powerText = fontText.render(str(power), True, WHITE)
+    callSkipText = fontText.render('Skip call - X', True, WHITE)
 
     # blit
     if left:
@@ -523,6 +528,52 @@ while run:
         if buttonRightDoor: win.blit(rightDoorCloseAnimation[rightDoorCounter], (rightDoorAnimationX, rightDoorAnimationY))
         if not buttonRightDoor: win.blit(rightDoorOpenAnimation[rightDoorCounter], (rightDoorAnimationX, rightDoorAnimationY))
 
+    if cameraOn and not cameraDeley:
+        if key[pygame.K_a]:
+            cameraNow, thirdNoiseCounter = 'A', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_d]:
+            cameraNow, thirdNoiseCounter = 'D', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_f]:
+            cameraNow, thirdNoiseCounter = 'F', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_g]:
+            cameraNow, thirdNoiseCounter = 'G', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_h]:
+            cameraNow, thirdNoiseCounter = 'H', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_j]:
+            cameraNow, thirdNoiseCounter = 'J', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_k]:
+            cameraNow, thirdNoiseCounter = 'K', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_l]:
+            cameraNow, thirdNoiseCounter = 'L', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_o]:
+            cameraNow, thirdNoiseCounter = 'O', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_p]:
+            cameraNow, thirdNoiseCounter = 'P', 0
+            boopSound.play()
+            cameraDeley = True
+        if key[pygame.K_s]:
+            cameraNow, thirdNoiseCounter = 'S', 0
+            boopSound.play()
+            cameraDeley = True
+
     win.blit(night1Night1, (nightX, nightY))
     if 3085 >= tick >= 0: win.blit(clock12AM, (clockX, clockY))
     elif 6170 >= tick >= 3085: win.blit(clock1AM, (clockX, clockY))
@@ -533,8 +584,11 @@ while run:
     elif 21595 >= tick >= 18510: win.blit(clock6AM, (clockX, clockY))
     elif tick == 21600: pass
 
+    if call1SkipDeley <= 400: win.blit(callSkipText, (callSkipTextX, callSkipTextY))
+
     win.blit(usage, (usageX, usageY))
     win.blit(powerText, (powerTextX, powerTextY))
+
     if power == 100:
         win.blit(interest, (interestX, interestY))
     elif 99 >= power >= 10:
@@ -549,28 +603,234 @@ while run:
     if usageNow == 4: win.blit(powerLeft4, (usagePowerLeftX, usagePowerLeftY))
     if usageNow == 5: win.blit(powerLeft5, (usagePowerLeftX, usagePowerLeftY))
 
+    if cameraOn: win.blit(camFlipOpen[camFlipCounter], (cameraFlipX, cameraFlipY))
+    else: win.blit(camFlipClose[camFlipCounter], (cameraFlipX, cameraFlipY))
+
+    if cameraBlackFill:
+        win.fill(BLACK)
+
+        if cameraNow == 'A':
+            if ARandint:
+                ARandintValue = random.choices([True, False], weights=[15, 85])
+                ARandint = False
+
+            if bonnyLocation == 'A' and chicaLocation == 'A' and freddyLocation == 'A' and ARandintValue == [False]:
+                win.blit(stage1, (camImageX, camImageY))
+            elif bonnyLocation == 'A' and chicaLocation == 'A' and freddyLocation == 'A' and ARandintValue == [True]:
+                win.blit(stage2, (camImageX, camImageY))
+            elif bonnyLocation != 'A' and chicaLocation == 'A' and freddyLocation == 'A':
+                win.blit(stage3, (camImageX, camImageY))
+            elif bonnyLocation == 'A' and chicaLocation != 'A' and freddyLocation == 'A':
+                win.blit(stage4, (camImageX, camImageY))
+            elif bonnyLocation != 'A' and chicaLocation != 'A' and freddyLocation == 'A' and ARandintValue == [False]:
+                win.blit(stage5, (camImageX, camImageY))
+            elif bonnyLocation != 'A' and chicaLocation != 'A' and freddyLocation == 'A' and ARandintValue == [True]:
+                win.blit(stage6, (camImageX, camImageY))
+            elif bonnyLocation != 'A' and chicaLocation != 'A' and freddyLocation != 'A':
+                win.blit(stage7, (camImageX, camImageY))
+        elif cameraNow == 'D':
+            if chicaLocation == 'D1' and chicaLocation != 'D2' and freddyLocation != 'D':
+                win.blit(toilets2, (camImageX, camImageY))
+            elif chicaLocation != 'D1' and chicaLocation == 'D2' and freddyLocation != 'D':
+                win.blit(toilets3, (camImageX, camImageY))
+            elif chicaLocation != 'D1' and chicaLocation != 'D2' and freddyLocation == 'D':
+                win.blit(toilets4, (camImageX, camImageY))
+            else:
+                win.blit(toilets1, (camImageX, camImageY))
+        elif cameraNow == 'F':
+            if FRandint:
+                FRandintValue = random.choices([True, False], weights=(5, 95))
+                FRandint = False
+
+            if bonnyLocation != 'F' and FRandintValue == [True]:
+                win.blit(employeesOnly4, (camImageX, camImageY))
+            elif bonnyLocation == 'F' and FRandintValue == [False]:
+                win.blit(employeesOnly2, (camImageX, camImageY))
+            elif bonnyLocation == 'F' and FRandintValue == [True]:
+                win.blit(employeesOnly3, (camImageX, camImageY))
+            else:
+                win.blit(employeesOnly1, (camImageX, camImageY))
+        elif cameraNow == 'G':
+            if GRandint:
+                GRandintValue = random.choices([True, False], weights=[10, 90])
+                GRandint = False
+            if cameraOn: foxyDeley = 0
+            if foxyStage == 4: foxyLocation = 'G2'
+
+            if foxyLocation == 'G' and foxyStage == 1:
+                win.blit(pirateCove1, (camImageX, camImageY))
+            elif foxyLocation == 'G' and foxyStage == 2:
+                win.blit(pirateCove2, (camImageX, camImageY))
+            elif foxyLocation == 'G' and foxyStage == 3:
+                win.blit(pirateCove3, (camImageX, camImageY))
+            elif foxyLocation != 'G' and foxyStage == 4 and GRandintValue == [False]:
+                win.blit(pirateCove4, (camImageX, camImageY))
+            elif foxyLocation != 'G' and foxyStage == 4 and GRandintValue == [True]:
+                win.blit(pirateCove5, (camImageX, camImageY))
+        elif cameraNow == 'J':
+            if bonnyLocation != 'J':
+                win.blit(utilityCloset1, (camImageX, camImageY))
+            else:
+                win.blit(utilityCloset2, (camImageX, camImageY))
+        elif cameraNow == 'K':
+            if bonnyLocation != 'K':
+                win.blit(leftHallwayWithoutBonnyAnimation[leftHallwayCounter], (camImageX, camImageY))
+            else:
+                win.blit(leftHallwayWithBonnyAnimation[leftHallwayCounter], (camImageX, camImageY))
+        elif cameraNow == 'L':
+            if LRandint:
+                LRandintValue = random.choices([True, False, 'GoldenFreddy'], weights=[2, 47, 2])
+                LRandint = False
+
+            if bonnyLocation == 'L' and LRandintValue == [True]:
+                win.blit(leftCorner6, (camImageX, camImageY))
+            elif bonnyLocation == 'L' and LRandintValue == [False]:
+                win.blit(leftCorner5, (camImageX, camImageY))
+            elif bonnyLocation == 'L' and LRandintValue == ['GoldenFreddy']:
+                win.blit(leftCorner4, (camImageX, camImageY))
+            elif bonnyLocation != 'L' and LRandintValue == [False]:
+                win.blit(leftCorner1, (camImageX, camImageY))
+            elif bonnyLocation != 'L' and LRandintValue == [True]:
+                win.blit(leftCorner2, (camImageX, camImageY))
+            elif bonnyLocation != 'L' and LRandintValue == ['GoldenFreddy']:
+                win.blit(leftCorner3, (camImageX, camImageY)) # Golden Freddy later
+        elif cameraNow == 'O':
+            if ORandint:
+                ORandintValue = random.choices(['1', '2', '3', '4', False], weights=[1, 1, 1, 1, 96])
+                ORandint = False
+
+            if chicaLocation != 'O' and freddyLocation != 'O' and ORandintValue == [False]:
+                win.blit(rightCorner1, (camImageX, camImageY))
+            elif chicaLocation != 'O' and freddyLocation != 'O' and ORandintValue == ['1']:
+                win.blit(rightCorner2, (camImageX, camImageY))
+            elif chicaLocation != 'O' and freddyLocation != 'O' and ORandintValue == ['2']:
+                win.blit(rightCorner3, (camImageX, camImageY))
+            elif chicaLocation != 'O' and freddyLocation != 'O' and ORandintValue == ['3']:
+                win.blit(rightCorner4, (camImageX, camImageY))
+            elif chicaLocation != 'O' and freddyLocation != 'O' and ORandintValue == ['4']:
+                win.blit(rightCorner5, (camImageX, camImageY))
+            elif chicaLocation == 'O' and freddyLocation != 'O' and ORandintValue == [False]:
+                win.blit(rightCorner6, (camImageX, camImageY))
+            elif chicaLocation == 'O' and freddyLocation != 'O' and ORandintValue == ['1']:
+                win.blit(rightCorner7, (camImageX, camImageY))
+            elif chicaLocation == 'O' and freddyLocation != 'O' and ORandintValue == ['2']:
+                win.blit(rightCorner8, (camImageX, camImageY))
+            elif chicaLocation != 'O' and freddyLocation == 'O':
+                win.blit(rightCorner9, (camImageX, camImageY))
+        elif cameraNow == 'P':
+            if PRandint:
+                PRandintValue = random.choices(['1', '2', False], weights=(1, 1, 98))
+                PRandint = False
+
+            if chicaLocation != 'P1' and chicaLocation != 'P2' and freddyLocation != 'P' and PRandintValue == [False]:
+                win.blit(rightHallway1, (camImageX, camImageY))
+            elif chicaLocation != 'P1' and chicaLocation != 'P2' and freddyLocation != 'P' and PRandintValue == ['1']:
+                win.blit(rightHallway2, (camImageX, camImageY))
+            elif chicaLocation != 'P1' and chicaLocation != 'P2' and freddyLocation != 'P' and PRandintValue == ['2']:
+                win.blit(rightHallway3, (camImageX, camImageY))
+            elif chicaLocation == 'P1' and chicaLocation != 'P2' and freddyLocation != 'P':
+                win.blit(rightHallway5, (camImageX, camImageY))
+            elif chicaLocation != 'P1' and chicaLocation == 'P2' and freddyLocation != 'P':
+                win.blit(rightHallway6, (camImageX, camImageY))
+            elif chicaLocation != 'P1' and chicaLocation != 'P2' and freddyLocation == 'P':
+                win.blit(rightHallway4, (camImageX, camImageY))
+        elif cameraNow == 'S':
+            if bonnyLocation != 'S1' and bonnyLocation != 'S2' and chicaLocation != 'S1' and chicaLocation != 'S2' and freddyLocation == 'S':
+                win.blit(diningRoom6, (camImageX, camImageY))
+            elif bonnyLocation != 'S1' and bonnyLocation != 'S2' and chicaLocation != 'S1' and chicaLocation == 'S2' and freddyLocation != 'S1':
+                win.blit(diningRoom5, (camImageX, camImageY))
+            elif bonnyLocation != 'S1' and bonnyLocation != 'S2' and chicaLocation == 'S1' and chicaLocation != 'S2' and freddyLocation != 'S1':
+                win.blit(diningRoom4, (camImageX, camImageY))
+            elif bonnyLocation != 'S1' and bonnyLocation == 'S2' and chicaLocation != 'S1' and chicaLocation != 'S2' and freddyLocation != 'S1':
+                win.blit(diningRoom3, (camImageX, camImageY))
+            elif bonnyLocation == 'S1' and bonnyLocation != 'S2' and chicaLocation != 'S1' and chicaLocation != 'S2' and freddyLocation != 'S1':
+                win.blit(diningRoom2, (camImageX, camImageY))
+            else:
+                win.blit(diningRoom1, (camImageX, camImageY))
+
+        if cameraNow != 'H':
+            win.blit(firstNoiseAnimation[firstNoiseCounter], (firstNoiseX, firstNoiseY))
+        win.blit(thirdNoiseAnimation[thirdNoiseCounter], (thirdNoiseX, thirdNoiseY))
+
+        if cameraNow == 'A':
+            win.blit(stageText, (stageTextX, stageTextY))
+            win.blit(CamA, (camMapX, camMapY))
+        elif cameraNow == 'D':
+            win.blit(toiletsText, (toiletsTextX, toiletsTextY))
+            win.blit(CamD, (camMapX, camMapY))
+        elif cameraNow == 'F':
+            win.blit(employeesOnlyText, (camEmployesOnlyTextX, camEmployesOnlyTextY))
+            win.blit(CamF, (camMapX, camMapY))
+        elif cameraNow == 'G':
+            win.blit(pirateCoveText, (pirateCoveTextX, pirateCoveTextY))
+            win.blit(CamG, (camMapX, camMapY))
+        elif cameraNow == 'H':
+            win.blit(kitchen1, (kitchen1X, kitchen1Y))
+
+            win.blit(kitchenText, (kitchenTextX, kitchenTextY))
+            win.blit(CamH, (camMapX, camMapY))
+        elif cameraNow == 'J':
+            win.blit(utilityClosetText, (utilityClosetTextX, utilityClosetTextY))
+            win.blit(CamJ, (camMapX, camMapY))
+        elif cameraNow == 'K':
+            win.blit(leftHallwayText, (leftHallwayTextX, leftHallwayTextY))
+            win.blit(CamK, (camMapX, camMapY))
+        elif cameraNow == 'L':
+            win.blit(leftCornerText, (leftCornerTextX, leftCornerTextY))
+            win.blit(CamL, (camMapX, camMapY))
+        elif cameraNow == 'O':
+            win.blit(rightCornerText, (rightCornerTextX, rightCornerTextY))
+            win.blit(CamO, (camMapX, camMapY))
+        elif cameraNow == 'P':
+            win.blit(rightHallwayText, (rightHallwayTextX, rightHallwayTextY))
+            win.blit(CamP, (camMapX, camMapY))
+        elif cameraNow == 'S':
+            win.blit(diningRoomText, (camDiningRoomTextX, camDiningRoomTextY))
+            win.blit(CamS, (camMapX, camMapY))
+
+        win.blit(CamOverlay, (cameraOverlayX, cameraOverlayY))
+        if pointCounter1: win.blit(CamPoint, (cameraPointX, cameraPointY))
+
     # update
     pygame.display.update()
 
+    thirdNoiseCounter += 1
+    firstNoiseCounter += 1
     fanCounter += 1
     leftDoorCounter += 1
     rightDoorCounter += 1
     tick += 1
     usageDeley -= 1
-
-    if fanCounter == len(fanAnimation): fanCounter = 0
-
+    camFlipCounter += 1
+    pointCounter += 1
+    leftHallwayCounter += 1
+    foxyDeley += 1
+    if call1SkipDeley <= 400: call1SkipDeley += 1
     if Counter < 275: Counter += 1
     if 215 > Counter > 200: secondNoiseCounter += 1
+    if pointCounter == 100:
+        if not pointCounter1: pointCounter1 = True
+        else: pointCounter1 = False
+        pointCounter = 0
 
-    if leftDoorCounter == len(leftDoorCloseAnimation):
-        leftDoorCounter = 15-1
-    if rightDoorCounter == len(rightDoorCloseAnimation):
-        rightDoorCounter = 15-1
-    if leftDoorCounter == len(leftDoorOpenAnimation):
-        leftDoorCounter = 15-1
-    if rightDoorCounter == len(rightDoorOpenAnimation):
-        rightDoorCounter = 15-1
+    if camFlipCounter == len(camFlipOpen): camFlipCounter = 11
+    if camFlipCounter == len(camFlipClose):
+        camFlipCounter = 11-1
+        if cameraOn: cameraBlackFill = True
+    if fanCounter == len(fanAnimation): fanCounter = 0
+    if leftDoorCounter == len(leftDoorCloseAnimation): leftDoorCounter = 15-1
+    if rightDoorCounter == len(rightDoorCloseAnimation): rightDoorCounter = 15-1
+    if leftDoorCounter == len(leftDoorOpenAnimation): leftDoorCounter = 15-1
+    if rightDoorCounter == len(rightDoorOpenAnimation): rightDoorCounter = 15-1
+    if leftHallwayCounter == len(leftHallwayWithoutBonnyAnimation): leftHallwayCounter = 0
+    if foxyDeley == 2700 and foxyStage != 4:
+        foxyStage += 1
+        foxyDeley = 0
+    if firstNoiseCounter == len(firstNoiseAnimation): firstNoiseCounter = 0
+    if thirdNoiseCounter == len(thirdNoiseAnimation): thirdNoiseCounter = 16-1
+
+    if camImageXMove: camImageX -= 1
+    else: camImageX += 1
 
 # quit
 pygame.quit()
