@@ -29,3 +29,6 @@ Newspaper has been added
 
 21.05.2023:
 Cameras are provided based on the chances of secrets appearing: camera F, G, L, O, P. Also added a call at the beginning of the night. GOLDEN FREDDY DOESN'T APPEAR.
+
+24.05.2023
+The sounds have been edited. New textures have been added. The first night is done. Golden Freddy is not added. Although the second night can be launched, it is a copy of the first one. Animatronics don't work by intelligence, but by scripted code.
