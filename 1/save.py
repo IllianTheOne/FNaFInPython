@@ -1,2 +1,2 @@
 change = True
-night = 1
+night = 3

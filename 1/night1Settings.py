@@ -19,8 +19,8 @@ thirdNoiseX, thirdNoiseY = 0, 0
 night1CountX, night1CountY = 550, 300
 
 # office, fan, button, door
-officeWithEnergyXLeft, officeWithEnergyYLeft = 0, 0
-officeWithEnergyXRight, officeWithEnergyYRight = -320, 0
+officeXLeft, officeYLeft = 0, 0
+officeXRight, officeYRight = -320, 0
 fanXRight, fanYRight = 780, 303
 fanXLeft, fanYLeft = 460, 303
 buttonLeftX, buttonLeftY = -5, 300
@@ -32,15 +32,15 @@ rightDoorAnimationY = 0
 
 # clock, usage, powerText, powerLeft
 # interest
-clockX, clockY = 1125, 5
-nightX, nightY = 1125, 35
-usageX, usageY = 10, 660
-powerTextX, powerTextY = 90, 657
-interestX, interestY = 135, 660
-interestX2, interestY2 = 123, 660
-interestX3, interestY3 = 111, 660
-powerLeftX, powerLeftY = 10, 690
-usagePowerLeftX, usagePowerLeftY = 155, 680
+clockX, clockY = 1125, 30
+nightX, nightY = 1125, 65
+usageX, usageY = 30, 670
+powerTextX, powerTextY = 175, 637
+interestX, interestY = 215, 640
+interestX2, interestY2 = 205, 640
+interestX3, interestY3 = 193, 640
+powerLeftX, powerLeftY = 30, 640
+usagePowerLeftX, usagePowerLeftY = 110, 663
 
 # camera
 cameraFlipX, cameraFlipY = 0, 0
@@ -63,3 +63,13 @@ utilityClosetTextX, utilityClosetTextY = 925, 275
 
 # skip call
 callSkipTextX, callSkipTextY = 10, 10
+
+# freddy, bonny, chica
+freddyJumpScareX, freddyJumpScareY = 0, 0
+bonnyJumpScareX, bonnyJumpScareY = 0, 0
+chicaJumpScareX, chicaJumpScareY = 0, 0
+
+# end
+endX, endY = 0, 0
+
+BackgroundX, BackgroundY = 400, 180

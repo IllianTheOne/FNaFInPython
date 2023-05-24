@@ -43,7 +43,19 @@ RightHallwayFolder = camFolder + 'Right Hallway/'
 StageFolder = camFolder + 'Stage/'
 ToiletsFolder = camFolder + 'Toilets/'
 UtilityClosetFolder = camFolder + 'Utility Closet/'
-
 # ~sounds
 officeSoundsFolder = './sounds/office/'
 cameraSoundsFolder = './sounds/camera/'
+freedySoundsFolder = './sounds/Animatronics/Freddy/'
+Am6 = './sounds/6 AM/'
+
+# jumpscares
+freedyFolder = './textures/Jump/freedy_no-light/'
+bonnyFolder = './textures/Jump/Bonnie/'
+chicaFolder = './textures/Jump/Chica/'
+
+# animatronics
+chicaFolderSounds = './sounds/Animatronics/Chica/'
+
+# 6AM
+endAM = './textures/6AM/'

@@ -1,5 +1,0 @@
-    if key[pygame.K_1]: usageNow = 1
-    if key[pygame.K_2]: usageNow = 2
-    if key[pygame.K_3]: usageNow = 3
-    if key[pygame.K_4]: usageNow = 4
-    if key[pygame.K_5]: usageNow = 5

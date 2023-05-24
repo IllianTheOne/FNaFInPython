@@ -1,0 +1,20 @@
+5340
+
+Freddy:
+12AM-6AM(if energy): cam A = 32040 >= tick >= 0
+
+Bonny:
+12AM-3AM+21s: cam A = 17880 >= tick >= 0
+3AM+21s-3AM+31s: cam S2 = 17880 >= tick >= 17180
+3AM+31s-3AM+67s: cam F = 20040 >= tick >= 17880
+3AM+67s-4AM+17s: cam K = 22380 >= tick >= 20040
+4AM+17s-4AM+24s: cam L = 22800 >= tick >= 22380
+4AM+24s-5AM+5s: door = 27000 >= tick >= 22800
+5AM+5s-5AM+47s: cam K = 29520 >= tick >= 27000
+5AM+47s-6AM: cam J = 32040 >= tick >= 29520
+
+Chica:
+12AM-4AM+51s: cam A = 24420 >= tick >= 0
+4AM+51s-5AM+33s: cam S = 28680 >= tick >= 24420
+5AM+33s-5AM+72s: cam H = 31020 >= tick >= 28680
+5AM+72s-6AM: P1 = 32040 >= tick >= 31020
